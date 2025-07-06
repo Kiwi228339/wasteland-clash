@@ -1,0 +1,8 @@
+{
+  "name": "Wasteland Clash",
+  "short_name": "WClash",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#222222",
+  "theme_color": "#444444"
+}

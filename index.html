@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wasteland Clash</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div id="game">
+    <div id="topbar">
+      <span>💧 Жижа: <span id="goo">0</span></span>
+      <button onclick="build('house')">🏠 Дом</button>
+      <button onclick="build('barracks')">⚔ Казарма</button>
+    </div>
+    <div id="map" onscroll="">
+      <div class="unit" style="top: 100px; left: 100px;">🧍</div>
+      <div class="base" style="top: 200px; left: 200px;">🏚</div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
