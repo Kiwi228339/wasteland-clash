@@ -31,4 +31,9 @@ body {
 .unit, .base {
   position: absolute;
   font-size: 24px;
+.home, .barracks {
+    position: absolute;
+    font-size: 28px;
 }
+}
+
