@@ -1,68 +1,82 @@
 body {
-  margin: 0;
-  font-family: monospace;
-  background: #111;
-  color: #fff;
+    margin: 0;
+    background: #111;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
 }
 
 #topbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #222;
-  padding: 8px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  z-index: 100;
-  font-size: 14px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    z-index: 10;
+}
+
+#overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#faction-select {
+    background: #222;
+    padding: 20px;
+    border: 2px solid #fff;
+    text-align: center;
+    color: white;
+}
+
+#faction-select button {
+    background: #444;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+#faction-select button:hover {
+    background: #666;
 }
 
 #map {
-  margin-top: 80px;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-  background-image: url("assets/map-bg.PNG");
-  background-size: cover;
-  background-position: center;
-  animation: scrollBg 20s linear infinite;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/map-pixel-bg.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
-@keyframes scrollBg {
-  0% { background-position: center top; }
-  100% { background-position: center bottom; }
+.unit, .building, .enemy-base {
+    position: absolute;
+    font-size: 24px;
+    transition: top 0.3s linear, left 0.3s linear;
 }
 
-.unit, .base, .enemy, .soldier, .home, .barracks {
-  position: absolute;
-  font-size: 28px;
-  transition: all 0.3s ease;
+.unit { z-index: 2; }
+.building { z-index: 1; }
+.enemy-base {
+    z-index: 3;
+    animation: pulse 2s infinite;
 }
 
-.soldier {
-  font-size: 24px;
-}
-
-.enemy.hit {
-  animation: blink 0.3s steps(2, end) 4;
-}
-
-@keyframes blink {
-  0% { opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; }
-}
-
-.effect {
-  position: absolute;
-  font-size: 20px;
-  animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(2); }
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
