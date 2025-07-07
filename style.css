@@ -13,27 +13,35 @@ body {
   background: #444;
   padding: 10px;
   display: flex;
-  justify-content: space-around;
+  gap: 10px;
   z-index: 10;
 }
 
 #map {
-  margin-top: 50px;
+  margin-top: 60px;
   width: 100vw;
   height: 100vh;
   overflow: scroll;
   position: relative;
-  background-image: url("assets/map-bg.PNG");
+  background-image: url("assets/map-bg.png");
   background-size: cover;
   background-position: center;
 }
 
-.unit, .base {
+.unit, .base, .enemy, .soldier, .home, .barracks {
   position: absolute;
-  font-size: 24px;
-.home, .barracks {
-    position: absolute;
-    font-size: 28px;
-}
+  font-size: 28px;
 }
 
+.soldier {
+  transition: left 0.2s linear, top 0.2s linear;
+  font-size: 24px;
+}
+
+.enemy {
+  font-size: 28px;
+}
+
+.home, .barracks {
+  font-size: 24px;
+}
