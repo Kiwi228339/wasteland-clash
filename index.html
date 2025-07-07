@@ -11,16 +11,24 @@
   <div id="game">
     <div id="topbar">
       💧 Жижа: <span id="juice">0</span>
-      <button id="buildHome">🏠 Дом</button>
-      <button id="buildBarracks">⚔️ Казарма</button>
+      <button id="buildHome">🏠 Стройка</button>
+      <button id="buildBarracks">⚔️ База</button>
       <button id="spawnSoldier">⚔️ Боец</button>
+      <button id="restart">🔁 Рестарт</button>
+      <button id="donate">💸 Донат</button>
     </div>
     <div id="map">
-      <div id="unit" class="unit" style="top: 100px; left: 100px;">🧍</div>
-      <div id="base" class="base" style="top: 200px; left: 200px;">🏚</div>
+      <div id="unit" class="unit" style="top: 100px; left: 100px;"></div>
+      <div id="base" class="base" style="top: 200px; left: 200px;"></div>
       <div id="enemyBase" class="enemy" style="top: 100px; left: 300px;">🏴‍☠️</div>
     </div>
+    <div id="stats">
+      🏗️ Зданий: <span id="buildingCount">0</span> | ⚔️ Бойцов: <span id="soldierCount">0</span>
+    </div>
   </div>
+  <audio id="bgMusic" autoplay loop>
+    <source src="assets/bg-music.mp3" type="audio/mpeg">
+  </audio>
   <script src="game.js"></script>
 </body>
 </html>
