@@ -1,18 +1,17 @@
-let map = document.getElementById("map");
-let juice = 10;
-let buildings = 1;
+let juice = 0;
 let offsetY = 100;
 
-// Обновление количества жижи
+// Обновляем текст в ресурсе
 function updateJuice() {
     document.getElementById("juice").innerText = juice;
 }
 
-// Строим здание
+// Создание зданий
 function build(type) {
     if (juice <= 0) return;
 
-    let building = document.createElement("div");
+    const map = document.getElementById("map");
+    const building = document.createElement("div");
     building.className = type;
     building.style.top = `${offsetY}px`;
     building.style.left = "150px";
@@ -21,57 +20,61 @@ function build(type) {
     if (type === "barracks") building.innerText = "⚔️";
 
     map.appendChild(building);
-
     offsetY += 80;
     juice--;
     updateJuice();
 }
 
-// Кнопки
+// Привязка кнопок
 document.getElementById("buildHome").addEventListener("click", () => build("home"));
 document.getElementById("buildBarracks").addEventListener("click", () => build("barracks"));
 
-// Инициализация
-updateJuice();
-let resourceAmount = 0;
-const resourceDisplay = document.getElementById("resource");
+// АНИМАЦИЯ ДОБЫТЧИКА
+function animateUnitToBase() {
+    const unit = document.getElementById("unit");
+    const base = document.getElementById("base");
 
-// координаты базы
-const base = document.querySelector(".base");
-const baseRect = base.getBoundingClientRect();
-const baseX = base.offsetLeft;
-const baseY = base.offsetTop;
+    if (!unit || !base) return;
 
-// функция движения добытчика
-function moveToBase(unit) {
-  let posX = unit.offsetLeft;
-  let posY = unit.offsetTop;
+    const unitX = parseInt(unit.style.left) || 100;
+    const unitY = parseInt(unit.style.top) || 100;
+    const baseX = parseInt(base.style.left) || 200;
+    const baseY = parseInt(base.style.top) || 200;
 
-  const step = 1;
+    const dx = baseX - unitX;
+    const dy = baseY - unitY;
 
-  const interval = setInterval(() => {
-    if (posX < baseX) posX += step;
-    if (posX > baseX) posX -= step;
-    if (posY < baseY) posY += step;
-    if (posY > baseY) posY -= step;
+    let progress = 0;
+    const duration = 2000;
+    const startX = unitX;
+    const startY = unitY;
 
-    unit.style.left = posX + "px";
-    unit.style.top = posY + "px";
+    function move() {
+        progress += 0.02;
+        const newX = startX + dx * progress;
+        const newY = startY + dy * progress;
 
-    if (Math.abs(posX - baseX) < 5 && Math.abs(posY - baseY) < 5) {
-      clearInterval(interval);
-      collectResource();
-      setTimeout(() => moveToBase(unit), 1000); // снова идёт
+        unit.style.left = `${newX}px`;
+        unit.style.top = `${newY}px`;
+
+        if (progress < 1) {
+            requestAnimationFrame(move);
+        } else {
+            juice++;
+            updateJuice();
+            setTimeout(() => {
+                unit.style.left = `${startX}px`;
+                unit.style.top = `${startY}px`;
+                animateUnitToBase();
+            }, 1000);
+        }
     }
-  }, 20);
+
+    requestAnimationFrame(move);
 }
 
-// запуск сбора
-function collectResource() {
-  resourceAmount += 1;
-  resourceDisplay.textContent = `💧 Жижа: ${resourceAmount}`;
-}
-
-// найти добытчиков и запустить
-const allUnits = document.querySelectorAll(".unit");
-allUnits.forEach(unit => moveToBase(unit));
+// Запуск игры
+window.onload = () => {
+    updateJuice();
+    animateUnitToBase();
+};
