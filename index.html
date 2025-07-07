@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wasteland Clash</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasteland Clash</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <div id="game">
+    <div id="overlay">
+        <div id="faction-select">
+            <h2>Выберите фракцию</h2>
+            <button onclick="startGame('mutants')">🧪 Мутанты</button>
+            <button onclick="startGame('robots')">🤖 Роботы</button>
+            <button onclick="startGame('bandits')">🔥 Уголовники</button>
+        </div>
+    </div>
+
     <div id="topbar">
-      💧 <span id="juice">0</span>
-      🏗️ <span id="buildingCount">0</span>
-      ⚔️ <span id="soldierCount">0</span>
-      🌟 <span id="missionText">Миссия: Построй 2 здания и атакуй врага</span>
-      <button id="buildHome">Стройка</button>
-      <button id="buildBarracks">Казарма</button>
-      <button id="spawnSoldier">Боец</button>
-      <button id="upgradeBase">⬆️ Апгрейд</button>
-      <button id="restart">🔁</button>
-      <button id="donate">💸</button>
+        <span id="resource">💧 Жижа: 0</span>
+        <button onclick="buildStructure('house')">🏠 Дом</button>
+        <button onclick="buildStructure('barracks')">⚔️ Казарма</button>
+        <button onclick="restartGame()">🔄 Перезапуск</button>
+        <button onclick="showStats()">📊 Статистика</button>
+        <button onclick="alert('Скоро появится донат 💸')">💸 Донат</button>
     </div>
-    <div id="map">
-      <div id="unit" class="unit" style="top: 100px; left: 100px;"></div>
-      <div id="base" class="base" style="top: 200px; left: 200px;"></div>
-      <div id="enemyBase" class="enemy" style="top: 100px; left: 300px;">🏴‍☠️</div>
-    </div>
-  </div>
-  <audio id="bgMusic" autoplay loop>
-    <source src="assets/bg-music.mp3" type="audio/mpeg">
-  </audio>
-  <script src="game.js"></script>
+
+    <div id="map"></div>
+
+    <audio id="bg-music" loop autoplay>
+        <source src="assets/music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="game.js"></script>
 </body>
 </html>
