@@ -23,7 +23,7 @@ body {
   height: 100vh;
   overflow: scroll;
   position: relative;
-  background-image: url("assets/map-bg.png");
+  background-image: url("assets/map-bg.PNG");
   background-size: cover;
   background-position: center;
 }
