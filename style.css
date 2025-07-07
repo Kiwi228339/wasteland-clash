@@ -10,46 +10,59 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  background: #333;
-  padding: 10px;
+  background: #222;
+  padding: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  z-index: 10;
+  gap: 6px;
+  z-index: 100;
+  font-size: 14px;
 }
 
 #map {
   margin-top: 80px;
   width: 100vw;
   height: 100vh;
-  overflow: scroll;
+  overflow: hidden;
   position: relative;
   background-image: url("assets/map-bg.PNG");
   background-size: cover;
   background-position: center;
+  animation: scrollBg 20s linear infinite;
+}
+
+@keyframes scrollBg {
+  0% { background-position: center top; }
+  100% { background-position: center bottom; }
 }
 
 .unit, .base, .enemy, .soldier, .home, .barracks {
   position: absolute;
   font-size: 28px;
+  transition: all 0.3s ease;
 }
 
 .soldier {
-  transition: left 0.2s linear, top 0.2s linear;
   font-size: 24px;
 }
 
-.enemy {
-  font-size: 28px;
+.enemy.hit {
+  animation: blink 0.3s steps(2, end) 4;
 }
 
-#stats {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #222;
-  padding: 5px 10px;
-  font-size: 14px;
-  z-index: 10;
+@keyframes blink {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.effect {
+  position: absolute;
+  font-size: 20px;
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(2); }
 }
